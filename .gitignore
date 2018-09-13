@@ -1,0 +1,6 @@
+.idea/
+vendor/
+coverage/
+clover.xml
+.DS_Store
+.DS_Store?
