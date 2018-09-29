@@ -17,5 +17,6 @@ class Test extends TestCase
         $this->assertFileExists($rootDir . '/.travis.yml');
         $this->assertFileExists($rootDir . '/Makefile');
         $this->assertFileExists($rootDir . '/README.md');
+        $this->assertFileExists($rootDir . '/LICENSE');
     }
 }
