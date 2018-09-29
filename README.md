@@ -1,1 +1,1 @@
-# ZeroPHP Skeleton Library
+# ZeroPHP Library Skeleton
