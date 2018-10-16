@@ -4,7 +4,7 @@ namespace Test;
 
 use PHPUnit\Framework\TestCase;
 
-class Test extends TestCase
+class LibrarySkeleton extends TestCase
 {
     /**
      * @test
@@ -18,5 +18,6 @@ class Test extends TestCase
         $this->assertFileExists($rootDir . '/Makefile');
         $this->assertFileExists($rootDir . '/README.md');
         $this->assertFileExists($rootDir . '/LICENSE');
+        $this->assertFileExists($rootDir . '/src/Installer.php');
     }
 }
