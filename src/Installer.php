@@ -28,8 +28,12 @@ class Installer
         $namespace = $io->ask(sprintf('Namespace [%s]: ', $autoNamespace)) ?: $autoNamespace;
         $alias = $io->ask(sprintf('Package Alias [%s]: ', $autoAlias)) ?: $autoAlias;
 
-        file_put_contents($root . '/README.md', self::getReplacedFileContents($root . '/README.md', $name, $alias));
-        file_put_contents($root . '/composer.json',
+        file_put_contents(
+            $root . '/README.md',
+            self::getReplacedFileContents($root . '/README.md', $name, $alias, $namespace)
+        );
+        file_put_contents(
+            $root . '/composer.json',
             preg_replace('/(,\s+"post-create-project-cmd".*")/', '',
                 self::getReplacedFileContents($root . '/composer.json', $name, $alias, $namespace)
             )
