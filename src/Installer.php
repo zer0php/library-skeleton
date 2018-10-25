@@ -22,14 +22,16 @@ class Installer
             throw new RuntimeException('Name can not be empty');
         }
 
+        $autoNamespace = str_replace(' ', '\\\\', $name);
         $autoAlias = str_replace(' ', '-', strtolower($name));
 
+        $namespace = $io->ask(sprintf('Namespace [%s]: ', $autoNamespace)) ?: $autoNamespace;
         $alias = $io->ask(sprintf('Package Alias [%s]: ', $autoAlias)) ?: $autoAlias;
 
         file_put_contents($root . '/README.md', self::getReplacedFileContents($root . '/README.md', $name, $alias));
         file_put_contents($root . '/composer.json',
             preg_replace('/(,\s+"post-create-project-cmd".*")/', '',
-                self::getReplacedFileContents($root . '/composer.json', $name, $alias)
+                self::getReplacedFileContents($root . '/composer.json', $name, $alias, $namespace)
             )
         );
 
@@ -37,10 +39,11 @@ class Installer
         unlink(__FILE__);
     }
 
-    private static function getReplacedFileContents($file, $name, $alias) {
+    private static function getReplacedFileContents($file, $name, $alias, $namespace) {
         return strtr(file_get_contents($file), [
             'Library Skeleton' => $name,
-            'library-skeleton' => $alias
+            'library-skeleton' => $alias,
+            '"Zero\\\\"' => '"Zero\\\\' . $namespace . '\\\\"'
         ]);
     }
 }
