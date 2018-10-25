@@ -6,11 +6,11 @@ help: ## This help message
 install: ## Install dependencies
 	composer install
 
-install-docker: ## Install dependencies in docker
-	docker run -v `PWD`:/opt/project zerosuxx/php-dev:latest composer install
+docker-install: ## Install dependencies in docker
+	bash -c "`awk 'match($$0, /docker-test\": \".*\"/) { print substr($$0, RSTART+15, RLENGTH-16) }' composer.json`"
 
-tst: ## run tests
+tst: ## Run tests
 	composer test
 
-tst-docker: ## run tests in docker
-	composer test-docker
+docker-tst: ## Run tests in docker
+	composer docker-test
