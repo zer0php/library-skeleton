@@ -47,7 +47,8 @@ class Installer
         return strtr(file_get_contents($file), [
             'Library Skeleton' => $name,
             'library-skeleton' => $alias,
-            '"Zero\\\\"' => '"Zero\\\\' . $namespace . '\\\\"'
+            '"Zero\\\\"' => '"Zero\\\\' . $namespace . '\\\\"',
+            '"ZeroTest\\\\"' => '"ZeroTest\\\\' . $namespace . '\\\\"'
         ]);
     }
 }
