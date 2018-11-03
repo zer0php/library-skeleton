@@ -34,7 +34,7 @@ class Installer
         );
         file_put_contents(
             $root . '/composer.json',
-            preg_replace('/(,\s+"post-create-project-cmd".*\])/', '',
+            preg_replace('/(,\s+"post-create-project-cmd".*\])/Us', '',
                 self::getReplacedFileContents($root . '/composer.json', $name, $alias, $namespace)
             )
         );
