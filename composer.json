@@ -29,6 +29,9 @@
     "scripts": {
         "test": "vendor/bin/phpunit --testdox --coverage-html coverage --coverage-clover clover.xml",
         "docker-test": "docker run -v `pwd`:/opt/project zerosuxx/php-dev:latest composer test",
-        "pre-install-cmd": "Zero\\Installer::preInstall"
+        "post-create-project-cmd": [
+            "Zero\\Installer::postCreateProject",
+            "@composer dump-autoload"
+        ]
     }
 }

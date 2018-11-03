@@ -12,7 +12,7 @@ use RuntimeException;
  */
 class Installer
 {
-    public static function preInstall(Event $event)
+    public static function postCreateProject(Event $event)
     {
         $root = dirname(__DIR__);
         $io = $event->getIO();
@@ -34,7 +34,7 @@ class Installer
         );
         file_put_contents(
             $root . '/composer.json',
-            preg_replace('/(,\s+"pre-install-cmd".*")/', '',
+            preg_replace('/(,\s+"post-create-project-cmd".*\])/', '',
                 self::getReplacedFileContents($root . '/composer.json', $name, $alias, $namespace)
             )
         );
