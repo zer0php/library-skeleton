@@ -12,7 +12,7 @@ use RuntimeException;
  */
 class Installer
 {
-    public static function preAutoloadDump(Event $event)
+    public static function preInstall(Event $event)
     {
         $root = dirname(__DIR__);
         $io = $event->getIO();
@@ -34,7 +34,7 @@ class Installer
         );
         file_put_contents(
             $root . '/composer.json',
-            preg_replace('/(,\s+"pre-autoload-dump".*")/', '',
+            preg_replace('/(,\s+"pre-install-cmd".*")/', '',
                 self::getReplacedFileContents($root . '/composer.json', $name, $alias, $namespace)
             )
         );
