@@ -1,5 +1,7 @@
 default: help
 
+run_in_docker=docker run -v `pwd`:/opt/project zerosuxx/php-dev:latest
+
 help: ## This help message
 	@fgrep -h "##" $(MAKEFILE_LIST) | fgrep -v fgrep | sed -e 's/\\$$//' -e 's/:.*#/: #/' | column -t -s '##'
 
@@ -7,10 +9,10 @@ install: ## Install dependencies
 	composer install
 
 docker-install: ## Install dependencies in docker
-	bash -c "`awk 'match($$0, /docker-test\": \".*\"/) { print substr($$0, RSTART+15, RLENGTH-16) }' composer.json`"
+	$(run_in_docker) composer install
 
-tst: ## Run tests
+test: ## Run tests
 	composer test
 
-docker-tst: ## Run tests in docker
-	composer docker-test
+docker-test: ## Run tests in docker
+	$(run_in_docker) composer test
