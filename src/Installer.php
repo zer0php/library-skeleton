@@ -39,7 +39,7 @@ class Installer
             )
         );
 
-        unlink($root . '/test/LibrarySkeleton.php');
+        unlink($root . '/tests/LibrarySkeleton.php');
         unlink(__FILE__);
     }
 
